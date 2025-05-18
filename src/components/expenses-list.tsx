@@ -1,3 +1,7 @@
+'use client';
+
+import { deleteExpense } from '@/actions/actions';
+
 type ExpenseListProps = {
   expenses: {
     id: number;
@@ -14,7 +18,12 @@ export default function ExpenseList({ expenses }: ExpenseListProps) {
         <li key={expense.id} className='flex items-center px-4 py-2 border-b'>
           <p>{expense.description}</p>
           <p className='ml-auto font-bold mr-[15px]'>${expense.amount}</p>
-          <button className='text-[10px] h-[20px] w-[20px] bg-red-500 text-white rounded hover:bg-red-800 hover:cursor-pointer'>
+          <button
+            onClick={async () => {
+              await deleteExpense(expense.id);
+            }}
+            className='text-[10px] h-[20px] w-[20px] bg-red-500 text-white rounded hover:bg-red-800 hover:cursor-pointer'
+          >
             X
           </button>
         </li>
